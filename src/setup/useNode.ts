@@ -7,7 +7,7 @@ import { nodeEvents } from '../misc/nodeEvents';
 import IUseCommon from '../structure/IUseCommon';
 import { defaultDisabledClass, defaultFocusClass } from '../misc/default';
 
-export function useNode(cmn: IUseCommon, props: INodeProps): IUseNode { 
+export function useNode(cmn: IUseCommon, props: INodeProps): IUseNode {
     const state = cmn.state;
     const node = cmn.node;
     const config = cmn.config;
@@ -58,7 +58,7 @@ export function useNode(cmn: IUseCommon, props: INodeProps): IUseNode {
     });
 
     const displayLoading = computed(() => {
-        return isLoading.value && !hasChildren.value && opened.value; 
+        return isLoading.value && !hasChildren.value && opened.value;
     });
 
     const displayLevel = computed(() => {
@@ -107,7 +107,7 @@ export function useNode(cmn: IUseCommon, props: INodeProps): IUseNode {
 
     const tabIndex = computed(() => {
         if (depth.value === 0 && index.value === 0 && isNil(state.focusable.value)) {
-            return 0; 
+            return 0;
         }
 
         return isFocusable.value ? 0 : -1;
@@ -119,6 +119,10 @@ export function useNode(cmn: IUseCommon, props: INodeProps): IUseNode {
         }
 
         return config.value.focusClass ? config.value.focusClass : defaultFocusClass;
+    });
+
+    const extraClass = computed(() => {
+        return hasState.value && node.value.state.extraClass;
     });
 
     watch(opened, (nv: boolean) => {
@@ -166,28 +170,28 @@ export function useNode(cmn: IUseCommon, props: INodeProps): IUseNode {
 
     const up = () => move(prevVisible);
 
-    const prev = ((id: string): string => { 
+    const prev = ((id: string): string => {
         const n = state.nodes.value[id];
 
         if (n.children && n.children.length > 0) {
             const idx = n.children.indexOf(node.value.id);
             const prev = n.children[idx - 1];
-            
+
             if (!isNil(prev)) {
                 return lastChild(prev);
             }
-        } 
+        }
 
         return n.id;
     });
 
     const prevVisible = ((id: string) => {
-        const n = state.nodes.value[id];  
+        const n = state.nodes.value[id];
         const p = state.nodes.value[n.parent];
 
         if (!p) {
             const idx = roots.value.indexOf(id);
-            return lastChild(roots.value[idx - 1]) || null;            
+            return lastChild(roots.value[idx - 1]) || null;
         }
 
         return prev(p.id);
@@ -198,7 +202,7 @@ export function useNode(cmn: IUseCommon, props: INodeProps): IUseNode {
 
         if (!n) {
             return null;
-        }  
+        }
 
         if (n.children && n.children.length > 0 && n.state.opened) {
             const last = n.children[n.children.length - 1];
@@ -263,6 +267,7 @@ export function useNode(cmn: IUseCommon, props: INodeProps): IUseNode {
         tabIndex,
         focusClass,
         disabledClass,
+        extraClass,
         isLeaf,
         isLoading,
         displayLoading,

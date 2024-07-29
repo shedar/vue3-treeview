@@ -12,7 +12,7 @@
     @keydown.up.stop="up"
     @keydown.down.stop="down"
   >
-    <div  
+    <div
       class="node-wrapper"
       :class="nodeClass"
       :style="style"
@@ -53,7 +53,7 @@
           :disabled="disabled"
           :indeterminate.prop="indeterminate"
         >
-      </div>  
+      </div>
 
       <slot
         name="before-input"
@@ -72,7 +72,7 @@
           @blur="blur"
         >
 
-        <span 
+        <span
           v-else
           class="node-text"
           @dblclick="focusInput"
@@ -181,7 +181,8 @@ export default {
         this.disabledClass,
         this.checkedClass,
         this.editableClass,
-        this.dragClass  
+        this.dragClass,
+        this.extraClass,
       ];
     }
   },

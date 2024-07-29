@@ -10,6 +10,7 @@
     "test": "jest",
     "dev": "vite",
     "build": "vite build",
+    "prepare": "vite build",
     "types": "tsc --emitDeclarationOnly",
     "bundle": "yarn run build && yarn run types",
     "lint": "eslint ./src --ext .vue,.js,.ts",
