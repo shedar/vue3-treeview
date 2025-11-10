@@ -21,7 +21,7 @@
   },
   "main": "dist/vue3-treeview.umd.js",
   "module": "dist/vue3-treeview.mjs",
-  "style": "dist/style.css",
+  "style": "dist/vue3-treeview.css",
   "types": "dist/**.d.ts",
   "files": [
     "dist/*"
